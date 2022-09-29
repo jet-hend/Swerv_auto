@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import com.swervedrivespecialties.swervelib.SdsModuleConfigurations;
+
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
@@ -39,18 +41,23 @@ public final class Constants {
     }
 
     public static final class SwerveDrive {
+
+        public final static double MAX_VOLTAGE = 12.0;
         /**
         * The left-to-right distance between the drivetrain wheels
         *
         * Should be measured from center to center.
         */
-        public static final double DRIVETRAIN_TRACKWIDTH_METERS = 0.6604; // FIXME Measure and set trackwidth
+        public static final double DRIVETRAIN_TRACKWIDTH_METERS = 0.6604; // Measure and set trackwidth
         /**
         * The front-to-back distance between the drivetrain wheels.
         *
         * Should be measured from center to center.
         */
-        public static final double DRIVETRAIN_WHEELBASE_METERS = 0.6604; // FIXME Measure and set wheelbase
+        public static final double DRIVETRAIN_WHEELBASE_METERS = 0.6604; // Measure and set wheelbase
+
+        public static final double MAX_VELOCITY_METERS_PER_SECOND = 6380.0 / 60.0 * SdsModuleConfigurations.MK4I_L1.getDriveReduction() * SdsModuleConfigurations.MK4I_L1.getWheelDiameter() * Math.PI;
+        public static final double MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND = MAX_VELOCITY_METERS_PER_SECOND / Math.hypot(DRIVETRAIN_TRACKWIDTH_METERS / 2.0, Constants.SwerveDrive.DRIVETRAIN_WHEELBASE_METERS / 2.0);
 
         public final static SwerveDriveKinematics m_kinematics = new SwerveDriveKinematics(
       // Front left
@@ -63,25 +70,25 @@ public final class Constants {
         new Translation2d(-Constants.SwerveDrive.DRIVETRAIN_TRACKWIDTH_METERS / 2.0, -Constants.SwerveDrive.DRIVETRAIN_WHEELBASE_METERS / 2.0));
         ////////////////////////////////////////////////////////////////////////////////////////////////
 
-        public static final int FRONT_LEFT_MODULE_DRIVE_MOTOR = 1; // FIXME Set front left module drive motor ID
-        public static final int FRONT_LEFT_MODULE_STEER_MOTOR = 2; // FIXME Set front left module steer motor ID
-        public static final int FRONT_LEFT_MODULE_STEER_ENCODER = 3; // FIXME Set front left steer encoder ID
-        public static final double FRONT_LEFT_MODULE_STEER_OFFSET = -Math.toRadians(5.44); // FIXME Measure and set front left steer offset
+        public static final int FRONT_LEFT_MODULE_DRIVE_MOTOR = 1; // front left module drive motor ID
+        public static final int FRONT_LEFT_MODULE_STEER_MOTOR = 2; // front left module steer motor ID
+        public static final int FRONT_LEFT_MODULE_STEER_ENCODER = 3; // front left steer encoder ID
+        public static final double FRONT_LEFT_MODULE_STEER_OFFSET = -Math.toRadians(5.44); // Measure and set front left steer offset
 
-        public static final int FRONT_RIGHT_MODULE_DRIVE_MOTOR = 4; // FIXME Set front right drive motor ID
-        public static final int FRONT_RIGHT_MODULE_STEER_MOTOR = 5; // FIXME Set front right steer motor ID
-        public static final int FRONT_RIGHT_MODULE_STEER_ENCODER = 6; // FIXME Set front right steer encoder ID
-        public static final double FRONT_RIGHT_MODULE_STEER_OFFSET = -Math.toRadians(269.4); // FIXME Measure and set front right steer offset
+        public static final int FRONT_RIGHT_MODULE_DRIVE_MOTOR = 4; // front right drive motor ID
+        public static final int FRONT_RIGHT_MODULE_STEER_MOTOR = 5; // front right steer motor ID
+        public static final int FRONT_RIGHT_MODULE_STEER_ENCODER = 6; // front right steer encoder ID
+        public static final double FRONT_RIGHT_MODULE_STEER_OFFSET = -Math.toRadians(269.4); // Measure and set front right steer offset
 
-        public static final int BACK_LEFT_MODULE_DRIVE_MOTOR = 7; // FIXME Set back left drive motor ID
-        public static final int BACK_LEFT_MODULE_STEER_MOTOR = 8; // FIXME Set back left steer motor ID
-        public static final int BACK_LEFT_MODULE_STEER_ENCODER = 9; // FIXME Set back left steer encoder ID
-        public static final double BACK_LEFT_MODULE_STEER_OFFSET = -Math.toRadians(339.96); // FIXME Measure and set back left steer offset
+        public static final int BACK_LEFT_MODULE_DRIVE_MOTOR = 7; // back left drive motor ID
+        public static final int BACK_LEFT_MODULE_STEER_MOTOR = 8; // back left steer motor ID
+        public static final int BACK_LEFT_MODULE_STEER_ENCODER = 9; // back left steer encoder ID
+        public static final double BACK_LEFT_MODULE_STEER_OFFSET = -Math.toRadians(339.96); // Measure and set back left steer offset
 
-        public static final int BACK_RIGHT_MODULE_DRIVE_MOTOR = 10; // FIXME Set back right drive motor ID
-        public static final int BACK_RIGHT_MODULE_STEER_MOTOR = 11; // FIXME Set back right steer motor ID
-        public static final int BACK_RIGHT_MODULE_STEER_ENCODER = 12; // FIXME Set back right steer encoder ID
-        public static final double BACK_RIGHT_MODULE_STEER_OFFSET = -Math.toRadians(4.48); // FIXME Measure and set back right steer offset
+        public static final int BACK_RIGHT_MODULE_DRIVE_MOTOR = 10; // back right drive motor ID
+        public static final int BACK_RIGHT_MODULE_STEER_MOTOR = 11; // back right steer motor ID
+        public static final int BACK_RIGHT_MODULE_STEER_ENCODER = 12; // back right steer encoder ID
+        public static final double BACK_RIGHT_MODULE_STEER_OFFSET = -Math.toRadians(4.48); // Measure and set back right steer offset
     }
 }
 
