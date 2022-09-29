@@ -116,6 +116,10 @@ public class SwerveDriveTrain extends SubsystemBase {
       odometer.resetPosition(pose, getGyroscopeRotation());
     }
 
+    public void stopModules() {
+      drive(new ChassisSpeeds(0.0, 0.0, 0.0));
+  }
+
     public void setModuleStates(SwerveModuleState[] States) {
       SwerveDriveKinematics.desaturateWheelSpeeds(States, Constants.AutoConstants.kMaxSpeedMetersPerSecond);
       SwerveModuleState[] states = Constants.SwerveDrive.m_kinematics.toSwerveModuleStates(m_chassisSpeeds);
