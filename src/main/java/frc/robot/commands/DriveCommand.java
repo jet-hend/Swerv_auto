@@ -51,9 +51,9 @@ public class DriveCommand extends CommandBase {
     double yAxis = -controller.getRawAxis(m_translationXSupplier);
     double rAxis = -controller.getRawAxis(m_rotationSupplier);
 
-    xAxis = RobotContainer.modifyAxis(-xAxis)* SwerveDriveTrain.MAX_VELOCITY_METERS_PER_SECOND;
-    yAxis = RobotContainer.modifyAxis(-yAxis)* SwerveDriveTrain.MAX_VELOCITY_METERS_PER_SECOND;
-    rAxis = RobotContainer.modifyAxis(-rAxis)* SwerveDriveTrain.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND;
+    xAxis = RobotContainer.modifyAxis(-xAxis)* Constants.SwerveDrive.MAX_VELOCITY_METERS_PER_SECOND;
+    yAxis = RobotContainer.modifyAxis(-yAxis)* Constants.SwerveDrive.MAX_VELOCITY_METERS_PER_SECOND;
+    rAxis = RobotContainer.modifyAxis(-rAxis)* Constants.SwerveDrive.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND;
 
     if(xAxis >= Dead || xAxis <= -Dead) {
     } else {
