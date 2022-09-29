@@ -17,7 +17,9 @@ import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ProfiledPIDCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
@@ -160,7 +162,11 @@ public class RobotContainer {
       s_swervedrivetrain
     );
     
-    return null;
+    return SequentialCommandGroup(
+      new InstantCommand(()->s_swervedrivetrain.resetOdometry(trajectory.getInitialPose())),
+      swerveControllerCommand,
+      new InstantCommand(()-> s_swervedrivetrain.stopModules()))
+    );
   }
 
 }
