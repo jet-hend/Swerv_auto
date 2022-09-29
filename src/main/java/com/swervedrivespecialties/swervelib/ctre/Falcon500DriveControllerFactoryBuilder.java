@@ -83,6 +83,7 @@ public final class Falcon500DriveControllerFactoryBuilder {
 
             return new ControllerImplementation(motor, sensorVelocityCoefficient);
         }
+
     }
 
     private class ControllerImplementation implements DriveController {
@@ -105,4 +106,5 @@ public final class Falcon500DriveControllerFactoryBuilder {
             return motor.getSelectedSensorVelocity() * sensorVelocityCoefficient;
         }
     }
+
 }

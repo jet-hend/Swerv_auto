@@ -4,6 +4,10 @@
 
 package frc.robot;
 
+import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
+import edu.wpi.first.math.trajectory.TrapezoidProfile;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants. This class should not be used for any other purpose. All constants should be declared
@@ -20,40 +24,18 @@ public final class Constants {
         public static final int JOYSTICK_PORT = 0;
     }
 
-    //shooter constants
-    public static final class Shooter {
-        public static final int Shoot_Motor_Left_ID = 17;
-        public static final int Shoot_Motor_Right_ID = 18;
-        public static final int Kicker_Motor_ID = 0;
-    }
-    //turret constants
-    public static final class Turret {
-        public static final int Turret_Motor_ID = 28;
-    }
-    //belts system constants
-    public static final class belts {
-        public static final int Bottom_Belts_Motor_ID = 0;
-        public static final int Upper_Belts_Motor_ID = 0;
-    }
-    //intake constants
-    public static final class intake {
-        public static final int Intake_Motor_ID = 0;
-    }
-    //Air system constants
-    public static final class AirSystem {
-
-        public static final int Pneumatic_Hub_ID = 0;
-
-    }
-    //random system constants
-    public static final class JunkDrawer {
-        //Lift motor ID
-        public static final int Lift_Motor_ID = 0;
-        //BeamBreak sensors
-        public static final int Beam_Break_1 = 0;
-        public static final int Beam_Break_2 = 0;
-		public static final double Lift_Max = 0;
-        public static final double Lift_Min = 0;
+    public static final class AutoConstants {
+        public static final double kMaxSpeedMetersPerSecond = 10;
+        public static final double kMaxAccelerationMetersPerSecondSquared = 10;
+        public static final double kMaxAngularSpeedRadiansPerSecond = Math.PI;
+        public static final double kMaxAngularSpeedRadiansPerSecondSquared = Math.PI;
+    
+        public static final double kPXController = 1;
+        public static final double kPYController = 1;
+        public static final double kPThetaController = 1;
+    
+        // Constraint for the motion profilied robot angle controller
+        public static final TrapezoidProfile.Constraints kThetaControllerConstraints = new TrapezoidProfile.Constraints(kMaxAngularSpeedRadiansPerSecond, kMaxAngularSpeedRadiansPerSecondSquared);
     }
 
     public static final class SwerveDrive {
@@ -69,27 +51,37 @@ public final class Constants {
         * Should be measured from center to center.
         */
         public static final double DRIVETRAIN_WHEELBASE_METERS = 0.6604; // FIXME Measure and set wheelbase
+
+        public final static SwerveDriveKinematics m_kinematics = new SwerveDriveKinematics(
+      // Front left
+        new Translation2d(Constants.SwerveDrive.DRIVETRAIN_TRACKWIDTH_METERS / 2.0, Constants.SwerveDrive.DRIVETRAIN_WHEELBASE_METERS / 2.0),
+      // Front right
+        new Translation2d(Constants.SwerveDrive.DRIVETRAIN_TRACKWIDTH_METERS / 2.0, -Constants.SwerveDrive.DRIVETRAIN_WHEELBASE_METERS / 2.0),
+      // Back left
+        new Translation2d(-Constants.SwerveDrive.DRIVETRAIN_TRACKWIDTH_METERS / 2.0, Constants.SwerveDrive.DRIVETRAIN_WHEELBASE_METERS / 2.0),
+      // Back right
+        new Translation2d(-Constants.SwerveDrive.DRIVETRAIN_TRACKWIDTH_METERS / 2.0, -Constants.SwerveDrive.DRIVETRAIN_WHEELBASE_METERS / 2.0));
         ////////////////////////////////////////////////////////////////////////////////////////////////
 
         public static final int FRONT_LEFT_MODULE_DRIVE_MOTOR = 1; // FIXME Set front left module drive motor ID
         public static final int FRONT_LEFT_MODULE_STEER_MOTOR = 2; // FIXME Set front left module steer motor ID
         public static final int FRONT_LEFT_MODULE_STEER_ENCODER = 3; // FIXME Set front left steer encoder ID
-        public static final double FRONT_LEFT_MODULE_STEER_OFFSET = -Math.toRadians(0.0); // FIXME Measure and set front left steer offset
+        public static final double FRONT_LEFT_MODULE_STEER_OFFSET = -Math.toRadians(5.44); // FIXME Measure and set front left steer offset
 
         public static final int FRONT_RIGHT_MODULE_DRIVE_MOTOR = 4; // FIXME Set front right drive motor ID
         public static final int FRONT_RIGHT_MODULE_STEER_MOTOR = 5; // FIXME Set front right steer motor ID
         public static final int FRONT_RIGHT_MODULE_STEER_ENCODER = 6; // FIXME Set front right steer encoder ID
-        public static final double FRONT_RIGHT_MODULE_STEER_OFFSET = -Math.toRadians(0.0); // FIXME Measure and set front right steer offset
+        public static final double FRONT_RIGHT_MODULE_STEER_OFFSET = -Math.toRadians(269.4); // FIXME Measure and set front right steer offset
 
         public static final int BACK_LEFT_MODULE_DRIVE_MOTOR = 7; // FIXME Set back left drive motor ID
         public static final int BACK_LEFT_MODULE_STEER_MOTOR = 8; // FIXME Set back left steer motor ID
         public static final int BACK_LEFT_MODULE_STEER_ENCODER = 9; // FIXME Set back left steer encoder ID
-        public static final double BACK_LEFT_MODULE_STEER_OFFSET = -Math.toRadians(0.0); // FIXME Measure and set back left steer offset
+        public static final double BACK_LEFT_MODULE_STEER_OFFSET = -Math.toRadians(339.96); // FIXME Measure and set back left steer offset
 
         public static final int BACK_RIGHT_MODULE_DRIVE_MOTOR = 10; // FIXME Set back right drive motor ID
         public static final int BACK_RIGHT_MODULE_STEER_MOTOR = 11; // FIXME Set back right steer motor ID
         public static final int BACK_RIGHT_MODULE_STEER_ENCODER = 12; // FIXME Set back right steer encoder ID
-        public static final double BACK_RIGHT_MODULE_STEER_OFFSET = -Math.toRadians(0.0); // FIXME Measure and set back right steer offset
+        public static final double BACK_RIGHT_MODULE_STEER_OFFSET = -Math.toRadians(4.48); // FIXME Measure and set back right steer offset
     }
 }
 
