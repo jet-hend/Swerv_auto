@@ -153,20 +153,19 @@ public class RobotContainer {
 
     SwerveControllerCommand swerveControllerCommand = new SwerveControllerCommand(
       trajectory,
-      SwerveDriveTrain::getPose,
+      s_swervedrivetrain.getPose,
       Constants.SwerveDrive.m_kinematics,
       xController,
       yController,
       thetaController,
-      SwerveDriveTrain::setModuleStates,
+      s_swervedrivetrain.setModuleStates,
       s_swervedrivetrain
     );
     
     return SequentialCommandGroup(
-      new InstantCommand(()->s_swervedrivetrain.resetOdometry(trajectory.getInitialPose())),
+      new InstantCommand(() -> s_swervedrivetrain.resetOdometry(trajectory.getInitialPose())),
       swerveControllerCommand,
-      new InstantCommand(()-> s_swervedrivetrain.stopModules()))
+      new InstantCommand(() -> s_swervedrivetrain.stopModules())
     );
   }
-
 }
