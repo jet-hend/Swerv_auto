@@ -18,12 +18,10 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.ProfiledPIDCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
-import frc.robot.Constants.SwerveDrive;
 //import auto commands
 import frc.robot.commands.DriveCommand;
 import frc.robot.subsystems.SwerveDriveTrain;
@@ -128,7 +126,7 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
 
-   static //gets DriverStation info
+    //gets DriverStation info
   public Command getAutonomousCommand() {
     //run in autonomous
     TrajectoryConfig trajectoryConfig = new TrajectoryConfig(
@@ -153,16 +151,16 @@ public class RobotContainer {
 
     SwerveControllerCommand swerveControllerCommand = new SwerveControllerCommand(
       trajectory,
-      s_swervedrivetrain.getPose,
+      s_swervedrivetrain::getPose,
       Constants.SwerveDrive.m_kinematics,
       xController,
       yController,
       thetaController,
-      s_swervedrivetrain.setModuleStates,
+      s_swervedrivetrain::setModuleStates,
       s_swervedrivetrain
     );
     
-    return SequentialCommandGroup(
+    return new SequentialCommandGroup(
       new InstantCommand(() -> s_swervedrivetrain.resetOdometry(trajectory.getInitialPose())),
       swerveControllerCommand,
       new InstantCommand(() -> s_swervedrivetrain.stopModules())
